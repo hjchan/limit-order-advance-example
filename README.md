@@ -7,7 +7,7 @@ This is a simple limit order taker example that utilise Jupiter quoting API to e
 1. Populate these environment variable to `.env` file
 
 ```
-RPC_ENDPOINT=<private rpc endpoint>
+RPC_URL=<private rpc endpoint>
 PRIVATE_KEY=<wallet private key>
 JUPITER_API_URL=<self hosted Jupiter endpoint>
 ```
