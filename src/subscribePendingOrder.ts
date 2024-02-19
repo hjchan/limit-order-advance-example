@@ -37,10 +37,9 @@ type PriceByInputMint = {
 
 export const subscribePendingOrder = async (): Promise<OrderAndPrice> => {
   const getOrdersAndPrice = async () => {
-    const tokenListResult = await (
-      await fetch(`${JUPITER_API_URL}/indexed-route-map?onlyDirectRoutes=true`)
+    const allTokens: string[] = await (
+      await fetch(`${JUPITER_API_URL}/tokens`)
     ).json();
-    const allTokens = tokenListResult["mintKeys"];
     const allTokenSet = new Set(allTokens);
 
     const timeNow = new Date().getTime() / 1000;
