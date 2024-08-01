@@ -1,4 +1,4 @@
-import { IdlAccounts, ProgramAccount } from "@coral-xyz/anchor";
+import { BN, IdlAccounts, ProgramAccount } from "@coral-xyz/anchor";
 import {
   JUPITER_API_URL,
   PROGRAM_ID,
@@ -42,11 +42,11 @@ export const subscribePendingOrder = async (): Promise<OrderAndPrice> => {
     ).json();
     const allTokenSet = new Set(allTokens);
 
-    const timeNow = new Date().getTime() / 1000;
+    const timeNow: BN = new BN(new Date().getTime() / 1000);
     const orders = await limitOrder.getOrders();
     const filteredOrders = orders
       .filter(({ account: { expiredAt } }) => {
-        return expiredAt === null || expiredAt.toNumber() > timeNow;
+        return expiredAt === null || expiredAt.gt(timeNow);
       })
       .filter(
         ({ account: { inputMint, outputMint } }) =>
